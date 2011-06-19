@@ -1,0 +1,39 @@
+body {
+    font-family: Trebuchet MS, Tahoma, Helvetica, Arial, sans serif;
+    font-size:   10pt;
+    padding:     0;
+    margin:      0;
+}
+table {
+    font-size: 100%;
+}
+tr {
+    vertical-align: top;
+}
+
+/*
+ * Big UI pieces
+ */
+#title {
+    padding:        0.75em;
+    background:     #9996C5;
+    color:          #15243B;
+    z-index:        100;
+}
+#title h1 {
+    margin:         0px;
+    padding:        0px;
+    font-size:      150%;
+}
+#title a {
+    color:          white;
+}
+
+#title a img {
+    border: none;
+}
+
+#starting-interface {
+    padding: 2em;
+}
+
