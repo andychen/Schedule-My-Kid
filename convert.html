@@ -108,9 +108,7 @@
                             
                             <p style="margin-top: 3em; text-align: center;">
                                 powered by<br/>
-                                <a href="http://simile.mit.edu/exhibit/">Exhibit</a>,
-                                <a href="http://simile.mit.edu/timegrid/">Timegrid</a>, and<br/>
-                                <a href="http://opendata.mit.edu/">MIT Open Data</a>
+				<a href="http://simile.mit.edu/exhibit/">Exhibit</a> and                             <a href="http://simile.mit.edu/timegrid/">Timegrid</a>
                             </p>
                         </td>
                         <td>
@@ -167,34 +165,7 @@
                     ex:showToolbox="false">
                 </div>
             </div>
-
-			<div id="pre-register" style="text-align:center"></div>
-			
-			<div id="textbook-purchase" style="text-align:center">
-			<div id="bookspicker-button"><a onClick="submitBooksQuery();"/></a></div>
-			</div>
-
-			<div id="textbook-list"
-				ex:role="view"
-				ex:viewClass="Tabular"
-				ex:showSummary="false"
-				ex:columns="if(exists(!class-textbook-of), value, ''),
-					if(exists(!class-textbook-of), !class-textbook-of.label, '')"
-				ex:columnLabels=", Book list"
-				ex:columnFormats="text, list"
-				ex:border="1"
-				ex:cellPadding="1"
-				ex:grouped="false"
-				ex:collectionID="picked-classes"
-				ex:showToolbox="false">
-			</div>
-
             <div id="no-picked-classes">No Classes Picked.</div>
-            <p style="color: #800; margin: 1em; font-size: 80%;">
-                WARNING: This calendar is not an official schedule. WebSIS will produce your 
-                schedule of the classes in which you are registered. All changes will then 
-                need to be processed through Drop/Add forms after Registration Day.
-                </p>
         </div>
         
         <!-- ==================== Generic Lens ==================== -->

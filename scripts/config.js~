@@ -1,5 +1,5 @@
 var debug = (document.location.search == "?debug");
-/*
+
 var courses = [
     {   number: "1",
         name:   "Civil and Environmental Engineering",
@@ -134,7 +134,7 @@ var courses = [
         hasData: true
     }
 ];
-   */ 
+    
 var facetData = {
     'course-facet': {
         expression: '.course',

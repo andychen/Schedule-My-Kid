@@ -4,25 +4,6 @@
  */
 var debug = false;
 
-/*
- * New logging code to study facet interaction
- * Hooks into the  proper logging facilities in the SimileAjax
- * package if present (at time of writing this, not yet baked 
- * into the "official" trunk)
- */
-function possiblyLog(obj) {
-    if (
-        (typeof SimileAjax == "object") &&
-        (typeof SimileAjax.RemoteLog == "object") && 
-        (typeof SimileAjax.RemoteLog.possiblyLog == 'function')
-    ) {
-        SimileAjax.RemoteLog.possiblyLog(obj);
-    }
-    else {
-        SimileAjax.RemoteLog.possiblyLog(obj);
-    }
-}
-
 Exhibit.Functions["building"] = {
     f: function(args) {
         var building = "";
@@ -39,7 +20,6 @@ Exhibit.Functions["building"] = {
  *==================================================
  */
 
-var hasTQE = false; 
 
 function onLoad() {
 	SimileAjax.Debug.silent = true;
@@ -54,9 +34,6 @@ function onLoad() {
             var name = a[0];
             var value = a.length > 1 ? decodeURIComponent(a[1]) : "";
             if (name == "courses") {
-                possiblyLog({
-                    "picker-initial-course":value
-                });
             	courseIDs = value.split(";");
 				addCourses(courseIDs, urls);
             } else if (name == "debug") {
@@ -67,7 +44,7 @@ function onLoad() {
     urls.push("data/schema.js");
    
 
-
+/*
     // pull necessary URLs from cookie, since window.database doesn't exist yet
 	var elts = PersistentData.stored('picked-classes').toArray();
 	for (var i = 0; i < elts.length; i++) {
@@ -75,28 +52,28 @@ function onLoad() {
 		if (course.length > 0)
 			addCourses([course], urls);
 	}
-
+*/
 
 
     // load data from MySQL
-    urls.push('data/user.php');
+//    urls.push('data/user.php');
     window.database = Exhibit.Database.create();
     
     var fDone = function() {
 
-//		var athena = window.database.getObject("user", "athena");
-//		var href = document.location.href;
-		
-//		if (document.location.protocol == 'https:' && athena != null) {
-//			href = href.replace('https:', 'http:');
-//			$('#httpsStatus').html(' &bull; logged in as ' + athena +
-//				'&bull; <a href="' + href + '">logout</a>');
-//		}
-//		else {
-//			href = href.replace('http:', 'https:');
-//			$('#httpsStatus').html(' &bull; <a href="' + href + '">login</a>');
-//		}
-	
+/*
+    var athena = window.database.getObject("user", "athena");
+    var href = document.location.href;
+    if (document.location.protocol == 'https:' && athena != null) {
+	href = href.replace('https:', 'http:');
+	$('#httpsStatus').html(' &bull; logged in as ' + athena +
+	'&bull; <a href="' + href + '">logout</a>');
+    }
+    else {
+	href = href.replace('http:', 'https:');
+	$('#httpsStatus').html(' &bull; <a href="' + href + '">login</a>');
+    }
+*/	
         document.getElementById("schedule-preview-pane").style.display = "block";
         document.getElementById("browsing-interface").style.display = "block";
         
@@ -113,13 +90,6 @@ function onLoad() {
         pickedSections._update();
         pickedClasses._update();
         
-        if (hasTQE) {
-            var tqeDiv = document.getElementById("tqe-facet");
-            tqeDiv.onclick = function() { makeFacet(this); };
-            tqeDiv.setAttribute("ex:role", "facet");
-            tqeDiv.setAttribute("ex:expression", ".TQE");
-            tqeDiv.setAttribute("ex:facetLabel", "TQE &raquo;");
-        }
         
         window.exhibit = Exhibit.create();
         window.exhibit.setCollection("picked-sections", pickedSections);
@@ -129,9 +99,6 @@ function onLoad() {
         setupExistingFacet(document.getElementById("category-facet"));
         setupExistingFacet(document.getElementById("semester-facet"));
         setupExistingFacet(document.getElementById("offering-facet"));
-        if (hasTQE) {
-            setupExistingFacet(document.getElementById("tqe-facet"));
-        }
         
         enableMiniTimegrid();
         enableUnitAdder();
@@ -154,7 +121,7 @@ function addCourses(courseIDs, urls) {
             }
         }
     }
-    
+ /*   
     // warehouse service is up and working as of December 2008.
     // NOTE, 2010FA is Fall of 2009-2010 school year. 2009FA is NOT correct. update: loaded as of 2010 spring
 // update: 2011FA is fall of 2010-2011 school year
@@ -165,11 +132,6 @@ function addCourses(courseIDs, urls) {
 	
 	for (var c = 0; c < courseIDs.length; c++) {
 		var courseID = courseIDs[c];
-		/* we have data for everything, so this doesn't seem necessary
-		if (!courses[courseID].hasData) {
-    		alert("Oops! We actually don't have the data for this course.");
-    		return; 
-    	}*/
     	
     	if (!isLoaded(courseID)) {
     	    if (courseID != "hass_d") {
@@ -181,8 +143,6 @@ function addCourses(courseIDs, urls) {
     	    // and missing wtw data
     	    urls.push("data/spring-fall/wtw-data/" + courseID + ".json");
     	    
-    		/* scraped data is not needed with working warehouse service
-    		urls.push("data/spring-fall/open-data/" + courseID + ".json"); */
     		if (courseID == "6") {
     			urls.push("data/tqe.json");
     			urls.push("data/hkn.json");
@@ -191,6 +151,8 @@ function addCourses(courseIDs, urls) {
     		markLoaded(courseID);
     	}
 	}
+*/
+
 }
 
 function loadMoreClass(button) {
@@ -206,7 +168,7 @@ function loadSingleCourse(course) {
     SimileAjax.WindowManager.cancelPopups();
     loadURLs(urls, function(){});
 }
-
+/*
 function markLoaded(courseID) {
     for (var i = 0; i < courses.length; i++) {
         var course = courses[i];
@@ -216,6 +178,7 @@ function markLoaded(courseID) {
         }
     }
 }
+*/
 
 function isLoaded(courseID) {
     for (var i = 0; i < courses.length; i++) {
@@ -253,9 +216,6 @@ function onAddMoreSelectChange() {
     var course = select.value;
     
     if (course.length > 0) {
-        possiblyLog({
-            "picker-add-course":course
-        });
         var urls = [];
         addCourses([course], urls);
         
@@ -575,17 +535,11 @@ function toggleFavorite(img) {
 function doFavorite(classID, img) {
     window.database.addStatement(classID, "favorite", "true");
     img.src = "images/yellow-star.png";
-    possiblyLog({
-        "picker-mark-favorite":classID
-    });
 }
 
 function undoFavorite(classID, img) {
     window.database.removeStatement(classID, "favorite", "true");
     img.src = "images/gray-star.png";
-    possiblyLog({
-        "picker-remove-favorite":classID
-    });
 }
 
 function processShowOnlyFavoriteClass(checkbox) {
@@ -608,18 +562,12 @@ function showFavoritesOnly() {
     var collection = window.exhibit.getDefaultCollection();
     collection._items = window.database.getSubjects("true", "favorite");
     collection._onRootItemsChanged();
-    possiblyLog({
-        "picker-toggle-favorite-filter":"show-favorites-only"
-    });
 }
 
 function showAllClasses() {
     var collection = window.exhibit.getDefaultCollection();
     collection._items = window.database.getSubjects("Class", "type");
     collection._onRootItemsChanged();
-    possiblyLog({
-        "picker-toggle-favorite-filter":"show-all"
-    });
 }
 
 /*==================================================
