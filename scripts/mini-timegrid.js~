@@ -39,10 +39,10 @@ function updateMiniTimegrid(preview, previewSectionID) {
                    Date.parseString(s, 'H:mm:ss') : null;
     };
     var addSection = function(sectionID) {
-	console.log("--SectionID-- "+sectionID);
+	console.log("SECTIONID "+sectionID);
         var db = window.exhibit.getDatabase();
         var type = db.getObject(sectionID, "type");
-	console.log("type: "+type);
+	console.log("ANDREW: "+type);
 //        var sectionData = sectionTypeToData[type];
 //        var classID = db.getObject(sectionID, sectionData.linkage);
         var label = db.getObject(sectionID, "label");

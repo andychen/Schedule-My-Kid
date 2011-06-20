@@ -37,7 +37,7 @@
     margin:         0;
     padding:        0.25em 0.5em;
     background:     #fcd1ac;
-/*    color:          #15243B; */
+    color:          #15243B;
 }
 #schedule-preview-pane div.title span {
     font-size:      120%;
@@ -85,7 +85,7 @@
     margin:         0;
     padding:        0.25em 0.5em;
     background:     #fcd1ac;
-/*    color:          #15243B; */
+    color:          #15243B;
 }
 #schedule-details-layer div.title span {
     font-size:      120%;
@@ -159,14 +159,14 @@ div.course-title {
     padding:        0.25em;
     font-weight:    bold;
     background:     #9996c5;
-/*    color:          #FFFCE6; */
+    color:          #FFFCE6;
 }
 span.course-name {
-/*    color:          #330033; */
+    color:          #330033;
 }
 span.course-semester {
     float: right;
-/*    color:          #660000; */
+    color:          #660000;
 }
 span.hasfinal {
     font-style: italic;
@@ -229,7 +229,7 @@ span.section-schedule {
 }
 div.preview-class-lens {
     padding:        2px;
-/*    color:          white; */
+    color:          white;
     margin-bottom:  1px;
 }
 button.remove-preview {
@@ -255,7 +255,7 @@ td.course-logistics {
 div.no-offering {
     font-size: 120%;
     font-weight: bold;
-/*    color: red; */
+    color: red;
 }
 div.report-errors a {
     font-size: 80%;
@@ -275,7 +275,7 @@ ul.instructor-ratings {
 }
 
 div.course-recitations-disclaimer {
-/*    color:      red; */
+    color:      red;
     font-style: italic;
     padding:    1em;
 }
@@ -341,8 +341,30 @@ div.rate span a:hover {
 	background-position: 0 -32px;
 }
 
+
+div.comments {
+	border: 1px solid #AAAAAA;
+	font-size: 80%;
+	margin-top: 5px;
+	margin-bottom: 15px;
+}
+div.comments div {
+	padding: 2px;
+}
+div.comments a div {
+	background-color: #CCCCCC;
+	color: #000000;
+	font-weight: bold;
+}
 div.each-comment {
 	border-bottom: 1px solid #AAAAAA;
+}
+div.comments div.message {
+	display: none;
+}
+div.comments div.input {
+	display: none;
+	padding: 4px;
 }
 
 #bookspicker-button a {

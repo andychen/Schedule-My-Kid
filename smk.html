@@ -29,34 +29,6 @@
     #mini-timegrid .timegrid-ylabels div.timegrid-label {
 	padding-top: 0px;
     }
-/*
- * Big UI pieces
- */
-#browsing-interface {
-    position:   relative;
-    width:      100%;
-}
-
-#add-more-select {
-    width: 100%;
-}
-/*
- * added the code below
- */
-.exhibit-collectionView-body div.info-body {
-    display: none;
-}
-#schedule-preview-pane {
-    z-index:    1;
-    position:   fixed;
-    top:        1em;
-    right:      3px;
-    width:      20em;
-    background: #FFFCE6;
-    border:     1px solid #fcd1ac;
-	overflow:auto;
-	bottom:0px;
-}
 
 #schedule-preview-pane > div {
     padding:    8px;
@@ -461,14 +433,12 @@ div.comments div.input {
 <span>Weekly Schedule</span><button onclick="output();"> iCalendar view </button>
 </div>
   
-<td ex:role="viewPanel">
-
-<!-- View Panel -->
+<td>
 
 <!-- Timegrid -->
 <div id="mini-timegrid"
     tg:role="grid" 
-    tg:views="n-month, property, n-day, month"
+    tg:views="month"
     tg:eventSource="miniEventSource"
     tg:mini="true" 
     tg:dayStart="8" 
@@ -477,28 +447,6 @@ div.comments div.input {
            
 <!-- Tiles -->
 <div ex:role="view"></div>
-
-<!-- Table -->
-<div ex:role="exhibit-view"
-    ex:viewClass="Exhibit.TabularView"
-    ex:columns=".label, .category, .subcategory, .age, .website"
-    ex:columnLabels="Name, Category, Subcategory, Age Group, Website"
-    ex:columnFormats="list, list, list, list, list"
-    ex:sortColumn="3"
-    ex:sortAscending="true">
-</div>
-
-<!-- Calendar -->
-<div ex:role="view" 
-    ex:viewClass="Calendar" 
-    ex:label="Calendar"
-    ex:start=".field_date_value"
-    ex:end=".field_date_value2"
-    ex:eventLabel=".title"
-    ex:formats="date { mode: short; show: date-time; template: 'MM/dd/yyyy' } item { title: expression(.title) }">
-</div>
-
-<!-- End of View Panel -->
 
            </td>
         </tr>

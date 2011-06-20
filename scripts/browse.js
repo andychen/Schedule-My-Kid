@@ -55,25 +55,10 @@ function onLoad() {
 */
 
 
-    // load data from MySQL
-//    urls.push('data/user.php');
     window.database = Exhibit.Database.create();
     
     var fDone = function() {
 
-/*
-    var athena = window.database.getObject("user", "athena");
-    var href = document.location.href;
-    if (document.location.protocol == 'https:' && athena != null) {
-	href = href.replace('https:', 'http:');
-	$('#httpsStatus').html(' &bull; logged in as ' + athena +
-	'&bull; <a href="' + href + '">logout</a>');
-    }
-    else {
-	href = href.replace('http:', 'https:');
-	$('#httpsStatus').html(' &bull; <a href="' + href + '">login</a>');
-    }
-*/	
         document.getElementById("schedule-preview-pane").style.display = "block";
         document.getElementById("browsing-interface").style.display = "block";
         
@@ -233,92 +218,12 @@ function loadURLs(urls, fDone) {
     var fNext = function() {
         if (urls.length > 0) {
             var url = urls.shift();
-            if (url.search(/http/) == 0) {
-            	Exhibit.importers["application/jsonp"].load(
-                    url, window.database, fNext, postProcessOfficialData);
-            } else {
             	loadScrapedData(url, window.database, fNext);
-            }
         } else {
             fDone();
         }
     };
     fNext();
-}
-
-// not used anymore
-function postProcessOfficialData(json) {
-    var items = json.items;				
-    for (var i = 0; i < items.length; i++) {
-        postProcessOfficialDataItem(items[i]);
-    }					
-    return json;
-}
-
-// not used anymore
-function postProcessOfficialDataItem(item) {
-    if ('offering' in item) {
-        item.offering == 'Y'?item.offering = 'Currently Offered':item.offering = 'Not offered this year';
-    }
-    if (item.type == 'LectureSession') {
-        item.type = 'LectureSection';
-        item["lecture-section-of"] = item["section-of"];
-        delete item["section-of"];
-    }
-    if (item.type == 'RecitationSession') {
-        item.type = 'RecitationSection';
-        item["rec-section-of"] = item["section-of"];
-        delete item["section-of"];
-    } 
-    if (item.type == 'LabSession') {
-        item.type = 'LabSection';
-        item["lab-section-of"] = item["section-of"];
-        delete item["section-of"];
-    } 
-    if ('prereqs' in item) {
-        if (item.prereqs == "") {
-            item.prereqs = "--";
-        }
-        while (item.prereqs.search(/[\]\[]/) >= 0 ) {
-            item.prereqs = item.prereqs.replace(/[\]\[]/, "");
-        }
-        var matches = item.prereqs.match(/([^\s\/]+\.[\d]+\w?)/g);
-        if (matches != null) {
-            var s = item.prereqs;
-            var output = "";
-            var from = 0;
-            for (var m = 0; m < matches.length; m++) {
-                var match = matches[m];
-                var i = s.indexOf(match, from);
-                var replace = 
-                    "<a href=\"javascript:{}\" onclick=\"showPrereq(this, '" +
-                        match.replace(/J/, "")+"');\">" + match + "</a>";
-                
-                output += s.substring(from, i) + replace;
-                from = i + match.length;
-            }
-            item.prereqs = output + s.substring(from);
-        }
-        /*if (item.prereqs.search(/;/) >= 0) {
-            while (item.prereqs.search(/or/) > 0) {
-                item.prereqs = item.prereqs.replace(/or/, ",");
-            }
-        } else if (item.prereqs.search(/or/) >= 0) {
-            while (item.prereqs.search(/or/) > 0) {
-                item.prereqs = item.prereqs.replace(/or/, ",");
-            }
-        } else {
-            while (item.prereqs.search(/,/) >= 0) {
-                item.prereqs = item.prereqs.replace(/,/, ";");
-            }
-        }
-        while (item.prereqs.search(/[a-zA-Z\s]/) >= 0 ) {
-            item.prereqs = item.prereqs.replace(/[a-zA-Z\s\]\[]/, "");
-        }*/
-    }
-    if ('timeAndPlace' in item) {
-        if (item.timeAndPlace.search(/ARRANGED/) >= 0 || item.timeAndPlace.search(/null/) >= 0) {item.timeAndPlace = 'To be arranged';}
-    } 
 }
 
 function loadScrapedData(link, database, cont) {
@@ -346,7 +251,7 @@ function loadScrapedData(link, database, cont) {
                     o = postProcessOfficialData(o);
                 } else {
                 	// this is all data now - open and scraped
-                    o = postProcessStaticData(o);
+//                    o = postProcessStaticData(o);
             	}
                 database.loadData(o, Exhibit.Persistence.getBaseURL(url));
             }
@@ -361,29 +266,7 @@ function loadScrapedData(link, database, cont) {
     SimileAjax.XmlHttp.get(url, fError, fDone);
 };
 
-// not used anymore
-function postProcessScrapedData(o) {
-    if ("items" in o) {
-        var items = o.items;
-        for (var j = 0; j < items.length; j++) {
-            var item = items[j];
-            if (database.containsItem(item.id)) {
-                if ('label' in item) {delete item.label;} 
-                if ('course' in item) {delete item.course;} 
-                if ('level' in item) {delete item.level;} 
-                if ('units' in item) {delete item.units;} 
-                if ('total-units' in item) {delete item["total-units"];} 
-                if ('description' in item) {delete item.description;} 
-                if ('semester' in item) {delete item.semester;} 
-                if ('offering' in item) {delete item.offering;} 
-                if ('prereq' in item) {delete item.prereq;} 
-                if ('Instructor' in item) {delete item["in-charge"];} 
-            }
-        }
-    }
-    return o;
-};
-
+/*
 // processes open and scraped data
 function postProcessStaticData(o) {
 	if ("items" in o) {
@@ -437,6 +320,7 @@ function postProcessStaticData(o) {
 	}
 	return o;
 }
+*/
 
 function showPrereq(elmt, itemID) {
     Exhibit.UI.showItemInPopup(itemID, elmt, exhibit.getUIContext());
@@ -509,66 +393,6 @@ function unmakeFacet(div) {
     div.onclick = function() { makeFacet(div); };
 }
 
-/*==================================================
- * Favorites
- *==================================================
- */
-function toggleFavorite(img) {
-    var classID = img.getAttribute("classID");
-    var favorite = window.database.getObject(classID, "favorite") == "true";
-    if (favorite) {
-        SimileAjax.History.addLengthyAction(
-            function() { undoFavorite(classID, img) },
-            function() { doFavorite(classID, img) },
-            "Unfavorite " + classID
-        );
-        
-    } else {
-        SimileAjax.History.addLengthyAction(
-            function() { doFavorite(classID, img) },
-            function() { undoFavorite(classID, img) },
-            "Favorite " + classID
-        );
-    }
-}
-
-function doFavorite(classID, img) {
-    window.database.addStatement(classID, "favorite", "true");
-    img.src = "images/yellow-star.png";
-}
-
-function undoFavorite(classID, img) {
-    window.database.removeStatement(classID, "favorite", "true");
-    img.src = "images/gray-star.png";
-}
-
-function processShowOnlyFavoriteClass(checkbox) {
-    if (checkbox.checked) {
-        SimileAjax.History.addLengthyAction(
-            function() { showFavoritesOnly(); checkbox.checked = true; },
-            function() { showAllClasses(); checkbox.checked = false; },
-            "Show favorites only"
-        );
-    } else {
-        SimileAjax.History.addLengthyAction(
-            function() { showAllClasses(); checkbox.checked = false; },
-            function() { showFavoritesOnly(); checkbox.checked = true; },
-            "Show all classes"
-        );
-    }
-};
-
-function showFavoritesOnly() {
-    var collection = window.exhibit.getDefaultCollection();
-    collection._items = window.database.getSubjects("true", "favorite");
-    collection._onRootItemsChanged();
-}
-
-function showAllClasses() {
-    var collection = window.exhibit.getDefaultCollection();
-    collection._items = window.database.getSubjects("Class", "type");
-    collection._onRootItemsChanged();
-}
 
 /*==================================================
  * Section picking
@@ -603,6 +427,7 @@ function onUnpick(button) {
 };
 
 function doPick(sectionID) {
+    console.log("doPick: "+sectionID);
     window.database.addStatement(sectionID, "picked", "true");
     window.database.addStatement(sectionID, "color", getNewColor());
     window.database.removeStatement(sectionID, "temppick", "true");
@@ -612,6 +437,7 @@ function doPick(sectionID) {
     showHidePickDiv(sectionID, true);
 }
 function doUnpick(sectionID) {
+    console.log("doUnpick: "+sectionID);
     var color = window.database.getObject(sectionID, "color");
     releaseColor(color);
     
