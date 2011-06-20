@@ -95,8 +95,8 @@
                         </td>
                         <td>
                             <div ex:role="view"
-                                ex:orders=".listing-index"
-                                ex:possibleOrders=".label, .listing-index, .semester, .offering, .level, .category, .units, .total-units"
+                                ex:orders=".category"
+                                ex:possibleOrders=".label, .category"
                                 ex:showAll="false"
                                 ex:grouped="false">
                             </div>
@@ -109,8 +109,8 @@
         
         <!-- ==================== Schedule Preview Pane ==================== -->
         <div id="schedule-preview-pane">
-            <div class="title"><button onclick="onShowScheduleDetails();">&laquo; full view</button>
-                <span>Weekly Schedule</span><button onclick="output();"> iCalendar view </button>
+            <div class="title">
+                <span style="font-size:125%">Weekly Schedule</span><button style="position:absolute; right:10px;" onclick="onShowScheduleDetails();">Full view &raquo;</button>
             </div>
             
             <div id="mini-timegrid" tg:role="grid" 
@@ -119,23 +119,12 @@
                 style="height:250px"></div>
             <div id="total-units"></div>
             <div ex:role="viewPanel">
-                <div ex:role="lens" ex:itemTypes="LectureSection" 
+                <div ex:role="lens" ex:itemTypes="Class" 
                     class="preview-class-lens" ex:background-style-content=".color" style="display: none;">
                     <button ex:sectionID-content="value" onclick="onUnpick(this);" class="remove-preview">X</button>
-                    <span ex:content=".lecture-section-of"></span> -
-                    <span ex:content=".lecture-section-of.label"></span> (lectures)
-                </div>
-                <div ex:role="lens" ex:itemTypes="RecitationSection" 
-                    class="preview-class-lens" ex:background-style-content=".color" style="display: none;">
-                    <button ex:sectionID-content="value" onclick="onUnpick(this);" class="remove-preview">X</button>
-                    <span ex:content=".rec-section-of"></span> -
-                    <span ex:content=".rec-section-of.label"></span> (rec)
-                </div>
-                <div ex:role="lens" ex:itemTypes="LabSection" 
-                    class="preview-class-lens" ex:background-style-content=".color" style="display: none;">
-                    <button ex:sectionID-content="value" onclick="onUnpick(this);" class="remove-preview">X</button>
-                    <span ex:content=".lab-section-of"></span> -
-                    <span ex:content=".lab-section-of.label"></span> (lab)
+                    <span ex:content=".label"></span>
+		    <!--                    <span ex:content=".lecture-section-of"></span> - -->
+		    <!-- <span ex:content=".lecture-section-of.label"></span> -->
                 </div>
 
                 <div ex:role="view"
