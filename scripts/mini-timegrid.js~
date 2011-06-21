@@ -39,10 +39,10 @@ function updateMiniTimegrid(preview, previewSectionID) {
                    Date.parseString(s, 'H:mm:ss') : null;
     };
     var addSection = function(sectionID) {
-	console.log("SECTIONID "+sectionID);
+	console.log("--SectionID-- "+sectionID);
         var db = window.exhibit.getDatabase();
         var type = db.getObject(sectionID, "type");
-	console.log("ANDREW: "+type);
+	console.log("type: "+type);
 //        var sectionData = sectionTypeToData[type];
 //        var classID = db.getObject(sectionID, sectionData.linkage);
         var label = db.getObject(sectionID, "label");
@@ -88,11 +88,12 @@ function updateMiniTimegrid(preview, previewSectionID) {
 							}
 						}
 					}
+					console.log("B: "+b);
 					var start = parseTime(b[0]);
 					var end = b.length > 1 ? parseTime(b[1]) : start.clone().add('h', 1);
 					var room = a.length > 4 ? (" @ " + a[a.length - 1]) : "";
 					for (var d = 0; d < days.length ; d++) {
-						addEvent(classLabel + room + " " + sectionData.postfix, days.substr(d,1), start, end, color);
+						addEvent(label + room + " " , days.substr(d,1), start, end, color);
 					}
 				} else {
 					var times = a[0].split(",");
@@ -118,7 +119,7 @@ function updateMiniTimegrid(preview, previewSectionID) {
 						var end = b.length > 1 ? parseTime(b[1]) : start.clone().add('h', 1);
 						var room = a.length > 1 ? (" @ " + a[a.length - 1]) : "";
 						for (var d = 0; d < days.length ; d++) {
-							addEvent(classLabel + room + " " + sectionData.postfix, days.substr(d,1), start, end, color);
+							addEvent(label + room + " " , days.substr(d,1), start, end, color);
 						}
 					}
 				}

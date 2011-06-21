@@ -4,6 +4,7 @@
 #browsing-interface {
     position:   relative;
     width:      100%;
+    overflow:	hidden;
 }
 
 #add-more-select {

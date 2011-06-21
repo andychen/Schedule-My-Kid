@@ -71,6 +71,8 @@ function updateMiniTimegrid(preview, previewSectionID) {
 						}
 					} else {
 						var days = a[0].substring(0, a[0].search(/\d/));
+						console.log("A: "+a);
+						console.log("days: "+days);
 						var time = a[0].substr(a[0].search(/\d/));
 						var b = time.split("-");
 						for (var x = 0; x < b.length; x++) {
@@ -88,11 +90,12 @@ function updateMiniTimegrid(preview, previewSectionID) {
 							}
 						}
 					}
+					console.log("B: "+b);
 					var start = parseTime(b[0]);
 					var end = b.length > 1 ? parseTime(b[1]) : start.clone().add('h', 1);
 					var room = a.length > 4 ? (" @ " + a[a.length - 1]) : "";
 					for (var d = 0; d < days.length ; d++) {
-						addEvent(classLabel + room + " " + sectionData.postfix, days.substr(d,1), start, end, color);
+						addEvent(label + room + " " , days.substr(d,1), start, end, color);
 					}
 				} else {
 					var times = a[0].split(",");
@@ -118,7 +121,7 @@ function updateMiniTimegrid(preview, previewSectionID) {
 						var end = b.length > 1 ? parseTime(b[1]) : start.clone().add('h', 1);
 						var room = a.length > 1 ? (" @ " + a[a.length - 1]) : "";
 						for (var d = 0; d < days.length ; d++) {
-							addEvent(classLabel + room + " " + sectionData.postfix, days.substr(d,1), start, end, color);
+							addEvent(label + room + " " , days.substr(d,1), start, end, color);
 						}
 					}
 				}

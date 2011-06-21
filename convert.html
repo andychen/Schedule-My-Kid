@@ -51,16 +51,6 @@
                     <span>Weekly Schedule</span>
                 </div>
                 <div id="schedule-details-layer-inner">
-                    <p><b>To print, in Firefox 2.0:</b>
-                        <ol>
-                            <li>Select the browser's menu File &rarr; Print Preview.</li>
-                            <li>Select "Portrait" in the print preview dialog's toolbar, and set "Scale" to about 70%.</li>
-                            <li>Click "Page Setup" and check "Print Background (colors &amp; images)".</li>
-                            <li>Click OK.</li>
-                            <li>Then click "Print...".</li>
-                        </ol>
-                    </p>
-                    
                 
                     <div id="timegrid" tg:role="grid" 
                         tg:views="week" tg:eventSource="timegridEventSource"
@@ -70,7 +60,7 @@
         
             <!-- ==================== Classes Layer ==================== -->
             <div id="classes-layer">
-                <div ex:role="collection" ex:itemTypes="Class"></div>
+                <div ex:role="collection" ex:itemTypes="Activity"></div>
                 <table cellpadding="10" border="0" cellspacing="0">
                     <tr valign="top">
                         <td width="23%" style="background: #BFBDAC">
@@ -119,16 +109,14 @@
                 style="height:250px"></div>
             <div id="total-units"></div>
             <div ex:role="viewPanel">
-                <div ex:role="lens" ex:itemTypes="Class" 
+                <div ex:role="lens" ex:itemTypes="Activity" 
                     class="preview-class-lens" ex:background-style-content=".color" style="display: none;">
                     <button ex:sectionID-content="value" onclick="onUnpick(this);" class="remove-preview">X</button>
                     <span ex:content=".label"></span>
-		    <!--                    <span ex:content=".lecture-section-of"></span> - -->
-		    <!-- <span ex:content=".lecture-section-of.label"></span> -->
                 </div>
 
                 <div ex:role="view"
-                    ex:orders=".class.courseNumber"
+                    ex:orders=".class.label"
                     ex:showHeader="false"
                     ex:showAll="false"
                     ex:grouped="false"
@@ -136,28 +124,21 @@
                     ex:showToolbox="false">
                 </div>
             </div>
-            <div id="no-picked-classes">No Schedules Picked.</div>
         </div>
         
-        <!-- ==================== Generic Lens ==================== -->
-        <div ex:role="exhibit-lens" class="generic-lens" style="display: none;">
-            The data for this class hasn't been loaded. We can load the data of the course containing this class.<br/>
-            <button ex:classID-content="value" onclick="loadMoreClass(this);">Load Data Now</button>
-        </div>
         
         <!-- ==================== Class Lens ==================== -->
-        <div ex:role="exhibit-lens" class="course-lens" style="display: none;" ex:itemTypes="Class">
+        <div ex:role="exhibit-lens" class="course-lens" style="display: none;" ex:itemTypes="Activity">
             <div class="course-title">
-                <img ex:src-subcontent="images/{{if(exists(.favorite),'yellow','gray')}}-star.png" class="favorite-icon" ex:classID-content="value" onclick="toggleFavorite(this);" />
 				<!-- .url property may exclusively come from scraped data -->
-				<a id="link-show" href="#show-info" onclick="toggleClassBody(this)"><span ex:content="concat(value, ' - ', .label)" class="course-name"></span></a> <a ex:href-content="if(exists(.url), .url, concat('http://course.mit.edu/', value))" target="_blank">site</a>
+				<a id="link-show" href="#show-info" onclick="toggleClassBody(this)"><span ex:content=".label" class="course-name"></span></a> <a ex:href-content="if(exists(.website), .website, concat('http://www.google.com/#q=', value))" target="_blank">website</a>
 				
             </div>
 	    <div id="show-info" class="info-body" style="display:block;"> 
             <table class="course-body" cellspacing="10"><tr>
                 <td>
-                    <div ex:content=".category" class="course-topic"></div>
-                    <div ex:content=".subcategory" class="course-topic"></div>
+		    <div ex:if-exists=".category"><span style="font-style:italic">Category: </span><span ex:content=".category"></span></div> 
+		    <div ex:if-exists=".subcategory"><span style="font-style:italic">Subcategory: </span><span ex:content=".subcategory"></span></div> 
                     <div ex:content=".description" class="course-description"></div>
                     
                             <div ex:class-subcontent="each-section-{{if(exists(.picked), 'picked', 'unpicked')}}" 
