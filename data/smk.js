@@ -42,6 +42,15 @@
             subcategory :           "Bible Study"
         },
         {   type :                  "Activity",
+            label :                 "Andrew Chinese School",
+	    description :	    "Come learn from an ABC!",
+            website :               "http://www.andrewchenchinese.org",
+            age:           	    "6-10",
+	    "timeAndPlace":	    "W11.30-3,R10.30-4.30,F8-10 Andrew's House",
+            category :              "Language",
+            subcategory :           "Chinese"
+        },
+	{   type :                  "Activity",
             label :                 "Old Bible Study",
 	    description :	    "Bible Study Seminars supports exploring God's purpose in our lives through Bible study that follows Christ; that calls forth deeper prayer, greater service, more fulfilling relationships, and ever-renewing faith communities.",
             website :               "http://www.obs.org",

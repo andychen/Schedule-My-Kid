@@ -93,15 +93,6 @@ function releaseColor(c) {
     }
 }
 
-/*
-var sectionTypeToData = {
-    "ActivitySession": {
-        linkage:    "lecture-section-of",
-        postfix:    "(lecture)"
-    }
-}
-*/
-
 /* PersistentData object: stores functionality to deal with persistent
  * data in a cleaner way.
  */

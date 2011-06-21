@@ -81,9 +81,6 @@ function onLoad() {
         window.exhibit.setCollection("picked-classes", pickedClasses);
         window.exhibit.configureFromDOM();
         
-        setupExistingFacet(document.getElementById("category-facet"));
-        setupExistingFacet(document.getElementById("semester-facet"));
-        setupExistingFacet(document.getElementById("offering-facet"));
         
         enableMiniTimegrid();
         enableUnitAdder();
@@ -364,10 +361,6 @@ function showSchedulePreview() {
     document.getElementById("schedule-preview-pane").style.visibility = "visible";
     
     scroll(0, 0);
-}
-
-function setupExistingFacet(div) {
-    div.firstChild.onclick = function() { unmakeFacet(div); }
 }
 
 function makeFacet(div) {

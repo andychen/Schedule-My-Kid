@@ -28,7 +28,7 @@
 	    description :	    "Lexington Chinese School, a non-profit organization, is committed to serve the Lexington community by providing an encouraging and unique environment in learning Chinese language, culture, and heritages. While English is the most widely used language globally, Chinese is the most spoken language in the world. Between these two languages lies an enormous gap that separates western and eastern cultures and forms a daunting barrier for communications and understanding. It is this gap that we seek to help bridge.",
             website :               "http://www.cfb.org",
             age:           	    "1-5",
-	    "timeAndPlace":	    "TR10-13 Chinese&nbsp;Baby&nbsp;Academy",
+	    "timeAndPlace":	    "TR10-13 Chinese Baby Academy",
             category :              "Language",
             subcategory :           "Chinese"
         },
@@ -42,6 +42,15 @@
             subcategory :           "Bible Study"
         },
         {   type :                  "Activity",
+            label :                 "Andrew Chinese School",
+	    description :	    "Come learn from an ABC!",
+            website :               "http://www.andrewchenchinese.org",
+            age:           	    "6-10",
+	    "timeAndPlace":	    "W11.30-3,R10-5,F8-10 Andrew's House",
+            category :              "Language",
+            subcategory :           "Chinese"
+        },
+	{   type :                  "Activity",
             label :                 "Old Bible Study",
 	    description :	    "Bible Study Seminars supports exploring God's purpose in our lives through Bible study that follows Christ; that calls forth deeper prayer, greater service, more fulfilling relationships, and ever-renewing faith communities.",
             website :               "http://www.obs.org",
