@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Schedule My Kid (alpha)</title>
+		<script src="http://needle.csail.mit.edu/pickzibit/src/webapp/api/exhibit-api.js?autoCreate=false&log=false" type="text/javascript"></script>
+        <script>
+            window.jQuery = SimileAjax.jQuery;
+            window.$ = SimileAjax.jQuery;
+        </script>
+        <script src="http://static.simile.mit.edu/timegrid/api-1.0-alpha2/timegrid-api.js?autoCreate=false" type="text/javascript"></script>
+
+        <script src="scripts/config.js" type="text/javascript"></script>
+        <script src="scripts/browse.js" type="text/javascript"></script>
+        <script src="scripts/mini-timegrid.js" type="text/javascript"></script>
+        <script src="scripts/class-related.js" type="text/javascript"></script>
+        <script src="scripts/user-data.js" type="text/javascript"></script>
+        <script type="text/javascript">
+		function toggleClassBody(a) {
+			var div=$(a.parentNode).siblings("div")[0];
+			if (div.style.display == "none") {
+				div.style.display = "block";
+			} else {
+				div.style.display = "none";
+			}
+		}
+	</script>
+
+        <link type="text/css" rel="stylesheet" href="styles/styles.css" />
+        <link type="text/css" rel="stylesheet" href="styles/browse.css" />
+    </head>
+    <body onload="onLoad();" ex:bubbleWidth="600">
+        <div id="title"><table width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td>
+                <h1 style="color: white">Schedule My Kid! (alpha)</h1>
+                <div style="position: relative; overflow: visible; z-index: 110; padding-left: 30px;">
+					<span id="httpsStatus"></span>
+					
+						
+                </div>
+            </td>
+            <td align="right" style="padding-right: 20em">
+            <td>
+        </tr></table></div>
+
+        
+        <!-- ==================== Browsing Interface ==================== -->
+        <div id="browsing-interface">
+            <!-- ==================== Schedule Details Layer ==================== -->
+            <div id="schedule-details-layer">
+                <div class="title"><button style="float: right;" onclick="onShowSchedulePreview();">back to all choices &raquo;</button>
+                    <span>Weekly Schedule</span>
+                </div>
+                <div id="schedule-details-layer-inner">
+                
+                    <div id="timegrid" tg:role="grid" 
+                        tg:views="week" tg:eventSource="timegridEventSource"
+                        tg:dayStart="8" tg:dayEnd="22" tg:yCell="80"></div>
+                </div>
+            </div>
+        
+            <!-- ==================== Classes Layer ==================== -->
+            <div id="classes-layer">
+                <div ex:role="collection" ex:itemTypes="Activity"></div>
+                <table cellpadding="10" border="0" cellspacing="0">
+                    <tr valign="top">
+                        <td width="23%" style="background: #BFBDAC">
+                            <b>Search</b>
+                            <div ex:role="facet" ex:facetClass="TextSearch"></div>
+                            <hr/>
+                            <div id="facets">
+				<div ex:role="facet" ex:expression=".category" ex:facetLabel="Category &raquo;" ex:collapsible="true"></div>
+				<div ex:role="facet" ex:expression=".subcategory" ex:facetLabel="Subcategory &raquo;" ex:collapsible="true"></div>
+				<div ex:role="facet" ex:expression=".age" ex:facetLabel="Age Group &raquo;" ex:collapsible="true"></div>
+                            </div>
+<!--                            
+                            <p style="margin-top: 3em; text-align: center;">
+                                powered by<br/>
+				<a href="http://simile.mit.edu/exhibit/">Exhibit</a> and                             <a href="http://simile.mit.edu/timegrid/">Timegrid</a>
+                            </p>
+			    -->			    
+                        </td>
+                        <td>
+                            <div ex:role="view"
+                                ex:orders=".category"
+                                ex:possibleOrders=".label, .category"
+                                ex:showAll="false"
+				ex:paginate="true"
+				ex:pageSize="5"
+                                ex:grouped="false">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+        </div>
+        
+        <!-- ==================== Schedule Preview Pane ==================== -->
+        <div id="schedule-preview-pane">
+            <div class="title">
+                <span style="font-size:125%">Weekly Schedule</span><button style="position:absolute; right:10px;" onclick="onShowScheduleDetails();">Full view &raquo;</button>
+            </div>
+            
+            <div id="mini-timegrid" tg:role="grid" 
+                tg:views="week" tg:eventSource="miniEventSource"
+                tg:mini="true" tg:dayStart="8" tg:dayEnd="22"
+                style="height:350px"></div>
+            <div id="total-units"></div>
+            <div ex:role="viewPanel">
+                <div ex:role="lens" ex:itemTypes="Activity" 
+                    class="preview-class-lens" ex:background-style-content=".color" style="display: none;">
+                    <button ex:sectionID-content="value" onclick="onUnpick(this);" class="remove-preview">X</button>
+                    <span ex:content=".label"></span>
+                </div>
+
+                <div ex:role="view"
+                    ex:orders=".class.label"
+                    ex:showHeader="false"
+                    ex:showAll="false"
+                    ex:grouped="false"
+                    ex:collectionID="picked-sections"
+                    ex:showToolbox="false">
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- ==================== Class Lens ==================== -->
+        <div ex:role="exhibit-lens" class="course-lens" style="display: none;" ex:itemTypes="Activity">
+            <div class="course-title">
+		<a id="link-show" href="#show-info" onclick="toggleClassBody(this)"><span ex:content=".label" class="course-name"></span></a> <a ex:href-content="if(exists(.website), .website, concat('http://www.google.com/#q=', value))" target="_blank">website</a>
+				
+            </div>
+	    <div id="show-info" class="info-body" style="display:block;"> 
+            <table class="course-body" cellspacing="10"><tr>
+                <td>
+		    <div ex:if-exists=".category"><span style="font-style:italic">Category: </span><span ex:content=".category"></span></div> 
+		    <div ex:if-exists=".subcategory"><span style="font-style:italic">Subcategory: </span><span ex:content=".subcategory"></span></div> 
+		    <div ex:if-exists=".age"><span style="font-style:italic">Age Group: </span><span ex:content=".age"></span></div> 
+                    <div ex:content=".description" class="course-description"></div>
+                    
+                            <div ex:class-subcontent="each-section-{{if(exists(.picked), 'picked', 'unpicked')}}" 
+                                ex:id-subcontent="divid-{{value}}"
+                                ex:sectionID-content="value"
+                                onmouseover="onMouseOverSection(this);"
+                                onmouseout="onMouseOutSection(this);">
+                                <button
+                                    ex:sectionID-content="value" 
+                                    ex:content="if(exists(.picked), 'Remove', 'Add')"
+                                    onclick="onPickUnpick(this);"></button>
+                            
+                                <span class="section-schedule" ex:content=".timeAndPlace"></span>
+                                <span ex:if-exists=".lecture-section-of.instructor"> &bull; </span>
+                                <span class="section-instructor" ex:content=".lecture-section-of.instructor"></span>
+                            </div>
+                </td>
+            </tr></table>
+	</div>
+        </div>
+        
+    </body>
+</html>
+
