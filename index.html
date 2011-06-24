@@ -138,7 +138,27 @@
 		    <div ex:if-exists=".subcategory"><span style="font-style:italic">Subcategory: </span><span ex:content=".subcategory"></span></div> 
 		    <div ex:if-exists=".age"><span style="font-style:italic">Age Group: </span><span ex:content=".age"></span></div> 
                     <div ex:content=".description" class="course-description"></div>
-                    
+
+                    <div ex:if-exists="!session-of"><b>Sessions:</b>
+                        <div ex:content="!session-of">
+
+                            <div ex:class-subcontent="each-section-{{if(exists(.picked), 'picked', 'unpicked')}}" 
+                                ex:id-subcontent="divid-{{value}}"
+                                ex:sectionID-content="value"
+                                onmouseover="onMouseOverSection(this);"
+                                onmouseout="onMouseOutSection(this);">
+                                <button
+                                    ex:sectionID-content="value" 
+                                    ex:content="if(exists(.picked), 'Remove', 'Add')"
+                                    onclick="onPickUnpick(this);"></button>
+                            
+                                <span class="section-schedule" ex:content=".timeAndPlace"></span>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+<!--                    
                             <div ex:class-subcontent="each-section-{{if(exists(.picked), 'picked', 'unpicked')}}" 
                                 ex:id-subcontent="divid-{{value}}"
                                 ex:sectionID-content="value"
@@ -153,6 +173,7 @@
                                 <span ex:if-exists=".lecture-section-of.instructor"> &bull; </span>
                                 <span class="section-instructor" ex:content=".lecture-section-of.instructor"></span>
                             </div>
+-->
                 </td>
             </tr></table>
 	</div>

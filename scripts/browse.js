@@ -57,6 +57,8 @@ function onLoad() {
 
     window.database = Exhibit.Database.create();
     
+/* ===== fDone function ===== */
+
     var fDone = function() {
 
         document.getElementById("schedule-preview-pane").style.display = "block";

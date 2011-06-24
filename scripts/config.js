@@ -2,7 +2,7 @@ var debug = (document.location.search == "?debug");
 
 var facetData = {
     'day-facet': {
-        expression: '!class!section.day',
+        expression: '!activity!section.day',
         facetLabel: 'day of week &raquo;',
         fixedOrder: 'M; T; W; R; F'
     },
