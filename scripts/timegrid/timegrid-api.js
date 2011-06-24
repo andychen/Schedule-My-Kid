@@ -45,10 +45,6 @@
             "layouts/monthly.js",
             "layouts/property.js"
         ];
-        var cssFiles = [
-            "timegrid.css",
-            "themes/theme-sandy-stone-beach-ocean-diver.css"
-        ];
         
         var locales = [  ];
         
@@ -86,7 +82,6 @@
             SimileAjax.includeCssFiles(document, Timegrid.urlPrefix, [ "timegrid-bundle.css" ]);
         } else {
             SimileAjax.includeJavascriptFiles(document, Timegrid.urlPrefix + "scripts/", javascriptFiles);
-            SimileAjax.includeCssFiles(document, Timegrid.urlPrefix + "styles/", cssFiles);
         }
         
         /*

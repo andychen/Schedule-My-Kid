@@ -214,17 +214,14 @@
         }
 
         var scriptURLs = Exhibit.params.js || [];
-        var cssURLs = Exhibit.params.css || [];
                 
         /*
          *  Core scripts and styles
          */
         if (Exhibit.params.bundle) {
             scriptURLs.push(Exhibit.urlPrefix + "exhibit-bundle.js");
-            cssURLs.push(Exhibit.urlPrefix + "exhibit-bundle.css");
         } else {
             SimileAjax.prefixURLs(scriptURLs, Exhibit.urlPrefix + "scripts/", javascriptFiles);
-            SimileAjax.prefixURLs(cssURLs, Exhibit.urlPrefix + "styles/", cssFiles);
         }
         
         /*
@@ -254,7 +251,6 @@
         
         if (!isCompiled) {
             SimileAjax.includeJavascriptFiles(document, "", scriptURLs);
-            SimileAjax.includeCssFiles(document, "", cssURLs);
         }
         
         Exhibit.loaded = true;

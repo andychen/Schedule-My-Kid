@@ -183,9 +183,6 @@ if (typeof SimileAjax == "undefined") {
                 "window-manager.js",
                 "remoteLog.js"
             ];
-            var cssFiles = [
-                "graphics.css"
-            ];
             if (!("jQuery" in window) && !("$" in window)) {
                 javascriptFiles.unshift("jquery-1.4.2.min.js");
             }
@@ -209,7 +206,6 @@ if (typeof SimileAjax == "undefined") {
                 } else {
                     SimileAjax.includeJavascriptFiles(document, SimileAjax.urlPrefix + "scripts/", javascriptFiles);
                 }
-                SimileAjax.includeCssFiles(document, SimileAjax.urlPrefix + "styles/", cssFiles);
             }
             
             SimileAjax.loaded = true;
