@@ -40,100 +40,6 @@
             locales:    [ "en" ]
         };
     
-        var javascriptFiles = [
-            "exhibit.js",
-            "persistence.js",
-            "authentication.js",
-            "util/set.js",
-            "util/util.js",
-            "util/settings.js",
-            "util/views.js",
-            "util/facets.js",
-            "util/coders.js",
-            
-            "data/database.js",
-            "data/expression.js",
-            "data/expression-parser.js",
-            "data/functions.js",
-            "data/controls.js",
-            "data/collection.js",
-            
-            "data/importers/authenticated-importer.js",
-            "data/importers/exhibit-json-importer.js",
-            "data/importers/html-table-importer.js",
-            "data/importers/jsonp-importer.js",
-            "data/importers/babel-based-importer.js",
-            "data/importers/rdfa-importer.js",
-            "data/importers/xml-importer.js",
-            "data/importers/tsv-csv-importer.js",
-            "data/importers/json-importer.js",
-            
-            "data/exporters/rdf-xml-exporter.js",
-            "data/exporters/semantic-wikitext-exporter.js",
-            "data/exporters/exhibit-json-exporter.js",
-            "data/exporters/tsv-exporter.js",
-            "data/exporters/bibtex-exporter.js",
-            "data/exporters/facet-selection-exporter.js",
-            
-            "ui/ui.js",
-            "ui/ui-context.js",
-            "ui/lens.js",
-            "ui/format-parser.js",
-            "ui/formatter.js",
-            "ui/coordinator.js",
-            
-            "ui/facets/list-facet.js",
-            "ui/facets/numeric-range-facet.js",
-            "ui/facets/text-search-facet.js",
-            "ui/facets/cloud-facet.js",
-            "ui/facets/hierarchical-facet.js",
-            "ui/facets/image-facet.js",
-	          "ui/facets/slider-facet.js",
-	          "ui/facets/slider.js",
-	          "ui/facets/alpha-range-facet.js",
-      	    
-            "ui/coders/color-coder.js",
-            "ui/coders/default-color-coder.js",
-            "ui/coders/color-gradient-coder.js",
-            "ui/coders/size-coder.js",
-            "ui/coders/size-gradient-coder.js",
-            "ui/coders/icon-coder.js",
-            
-            "ui/widgets/logo.js",
-            "ui/widgets/collection-summary-widget.js",
-            "ui/widgets/resizable-div-widget.js",
-            "ui/widgets/legend-widget.js",
-            "ui/widgets/legend-gradient-widget.js",
-            "ui/widgets/option-widget.js",
-            "ui/widgets/toolbox-widget.js",
-            
-            "ui/views/view-panel.js",
-            "ui/views/ordered-view-frame.js",
-            "ui/views/tile-view.js",
-            "ui/views/thumbnail-view.js",
-            "ui/views/tabular-view.js",
-            "ui/views/html-view.js"
-        ];
-        var cssFiles = [
-            "exhibit.css",
-            "browse-panel.css",
-            "lens.css",
-            
-            "util/facets.css",
-            "util/views.css",
-            
-            "widgets/collection-summary-widget.css",
-            "widgets/resizable-div-widget.css",
-            "widgets/legend-widget.css",
-            "widgets/option-widget.css",
-            "widgets/toolbox-widget.css",
-            
-            "views/view-panel.css",
-            "views/tile-view.css",
-            "views/thumbnail-view.css",
-            "views/tabular-view.css"
-        ];
-        
         var includeMap = false;
         var includeTimeline = false;
         
@@ -221,7 +127,6 @@
         if (Exhibit.params.bundle) {
             scriptURLs.push(Exhibit.urlPrefix + "exhibit-bundle.js");
         } else {
-            SimileAjax.prefixURLs(scriptURLs, Exhibit.urlPrefix + "scripts/", javascriptFiles);
         }
         
         /*

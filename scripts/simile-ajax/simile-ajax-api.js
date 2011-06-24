@@ -165,28 +165,6 @@ if (typeof SimileAjax == "undefined") {
     
     if (!isCompiled) {
         (function() {
-            var javascriptFiles = [
-                "platform.js",
-                "debug.js",
-                "xmlhttp.js",
-                "json.js",
-                "dom.js",
-                "graphics.js",
-                "date-time.js",
-                "string.js",
-                "html.js",
-                "data-structure.js",
-                "units.js",
-                
-                "ajax.js",
-                "history.js",
-                "window-manager.js",
-                "remoteLog.js"
-            ];
-            if (!("jQuery" in window) && !("$" in window)) {
-                javascriptFiles.unshift("jquery-1.4.2.min.js");
-            }
-            
             if (typeof SimileAjax_urlPrefix == "string") {
                 SimileAjax.urlPrefix = SimileAjax_urlPrefix;
             } else {
@@ -201,11 +179,7 @@ if (typeof SimileAjax == "undefined") {
             }
 
             if (!isCompiled) {
-                if (SimileAjax.params.bundle) {
                     SimileAjax.includeJavascriptFiles(document, SimileAjax.urlPrefix, [ "simile-ajax-bundle.js" ]);
-                } else {
-                    SimileAjax.includeJavascriptFiles(document, SimileAjax.urlPrefix + "scripts/", javascriptFiles);
-                }
             }
             
             SimileAjax.loaded = true;
