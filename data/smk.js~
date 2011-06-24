@@ -40,7 +40,7 @@
 	},
 	{
 	    "type":		    "Session",
-	    "id":		    "S2",
+	    "id":		    "S7",
 	    "label":		    "2nd session",
 	    "session-of":	    "2",
 	    "timeAndPlace":	    "WF16-20 German International School",

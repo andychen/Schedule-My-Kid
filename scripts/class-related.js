@@ -26,36 +26,8 @@ function enableClassList() {
         
         updateCookies();
         
-        // blurb to update pre-registration div - only active at certain times
-        if (classes.size() > 0) {
-            var div = document.getElementById('pre-register');
-            var text = ['<input type="button" onclick="document.location=\'http://student.mit.edu/ent/cgi-bin/sfprwtrm.sh?'];
-            text.push(classes.toArray().join(","));
-            text.push('\'" value="Pre-register these classes"/>');
-            var text = ['<form method=post action="http://student.mit.edu/catalog/prereg_message.cgi">'];
-            classes.visit(function(classID) {
-                text.push('<input type="hidden" name="STATUS" value="Add">'
-                            + '<input type="hidden" name="SUBJECT" value="' + classID + '">'
-                            + '<input type="hidden" name="UNIT" value="">'
-                            + '<input type="hidden" name="TITLE" value="">'
-                            + '<input type="hidden" name="LP" value="">');
-            });
-            text.push('<INPUT TYPE="submit" VALUE="Pre-register these classes"></FORM>');
-        
-            div.innerHTML = text.join('');
-            }
         }
     });
-}
-
-function submitBooksQuery() {
-    var classes = window.exhibit.getCollection("picked-classes").getRestrictedItems();
-    var classIDs = [];
-    classes.visit(function(classID) {
-    	classIDs.push(classID);
-    	});
-    var classIdsText = classIDs.join(",");
-    window.location = "http://www.bookspicker.com/#search?q=".concat(classIdsText) + "&bundle=".concat(classIdsText);
 }
 
 // updates cookies AND pushes updates to database.

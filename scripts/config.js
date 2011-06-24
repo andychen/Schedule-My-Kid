@@ -1,32 +1,5 @@
 var debug = (document.location.search == "?debug");
 
-var facetData = {
-    'day-facet': {
-        expression: '!activity!section.day',
-        facetLabel: 'day of week &raquo;',
-        fixedOrder: 'M; T; W; R; F'
-    },
-    'category-facet': {
-        expression: '.category',
-        facetLabel: 'category &raquo;',
-        height:     '20em'
-    },
-    'subcategory-facet': {
-        expression: '.subcategory',
-        facetLabel: 'subcategory &raquo;',
-        height:     '20em'
-    },   
-    'age-facet': {
-        expression: '.age',
-        facetLabel: 'Age Group &raquo;',
-        height:     '20em'
-    },   
-   'website-facet': {
-        expression: '.website',
-        facetLabel: 'Website &raquo;'
-    }
-};
-
 var colorTable = [
     {   color:      "#F01E4F",
         used:       false

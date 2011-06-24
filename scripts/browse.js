@@ -85,9 +85,7 @@ function onLoad() {
         
         
         enableMiniTimegrid();
-        enableUnitAdder();
-        fillAddMoreSelect();
-        enableClassList();
+//        enableClassList();
         checkForCookies();
     };
     loadURLs(urls, fDone);
@@ -105,38 +103,6 @@ function addCourses(courseIDs, urls) {
             }
         }
     }
- /*   
-    // warehouse service is up and working as of December 2008.
-    // NOTE, 2010FA is Fall of 2009-2010 school year. 2009FA is NOT correct. update: loaded as of 2010 spring
-// update: 2011FA is fall of 2010-2011 school year
-	var coursesString = coursesA.join(";");
-	if (coursesString != "" && coursesString != null) {
-        urls.push('http://coursews.mit.edu/coursews/?term=2012FA&courses=' + coursesString);
-	}
-	
-	for (var c = 0; c < courseIDs.length; c++) {
-		var courseID = courseIDs[c];
-    	
-    	if (!isLoaded(courseID)) {
-    	    if (courseID != "hass_d") {
-    		    urls.push("data/spring-fall/textbook-data/" + courseID + ".json");
-		    }
-    		
-    		// a light file representing some scraped information unavailable from data warehouse
-    	    urls.push("data/spring-fall/scraped-data/" + courseID + ".json");
-    	    // and missing wtw data
-    	    urls.push("data/spring-fall/wtw-data/" + courseID + ".json");
-    	    
-    		if (courseID == "6") {
-    			urls.push("data/tqe.json");
-    			urls.push("data/hkn.json");
-    			hasTQE = true;
-    		}
-    		markLoaded(courseID);
-    	}
-	}
-*/
-
 }
 
 function loadMoreClass(button) {
@@ -152,64 +118,12 @@ function loadSingleCourse(course) {
     SimileAjax.WindowManager.cancelPopups();
     loadURLs(urls, function(){});
 }
-/*
-function markLoaded(courseID) {
-    for (var i = 0; i < courses.length; i++) {
-        var course = courses[i];
-        if (courseID == course.number) {
-            course.loaded = true;
-            return;
-        }
-    }
-}
-*/
 
 function isLoaded(courseID) {
     for (var i = 0; i < courses.length; i++) {
         var course = courses[i];
         if (courseID == course.number)
             return course.loaded ? true : false;
-    }
-}
-
-function fillAddMoreSelect() {
-    var select = document.getElementById("add-more-select");
-    select.innerHTML = "";
-    
-    var option = document.createElement("option");
-    option.value = "";
-    option.label = "add more courses";
-    option.text = "add more courses";
-    select.appendChild(option);
-    
-    for (var i = 0; i < courses.length; i++) {
-        var course = courses[i];
-        if (course.hasData && !(course.loaded)) {
-            var label = course.number + " " + course.name;
-            option = document.createElement("option");
-            option.value = course.number;
-            option.label = label;
-            option.text = label;
-            select.appendChild(option);
-        }
-    }
-}
-
-function onAddMoreSelectChange() {
-    var select = document.getElementById("add-more-select");
-    var course = select.value;
-    
-    if (course.length > 0) {
-        var urls = [];
-        addCourses([course], urls);
-        
-        SimileAjax.WindowManager.cancelPopups();
-        
-        Exhibit.UI.showBusyIndicator();
-        loadURLs(urls, function(){ 
-            Exhibit.UI.hideBusyIndicator();
-            fillAddMoreSelect(); 
-        });
     }
 }
 
@@ -246,12 +160,6 @@ function loadScrapedData(link, database, cont) {
             }
             
             if (o != null) {
-                if (url.indexOf("/exceptions/") >= 0) {
-                    o = postProcessOfficialData(o);
-                } else {
-                	// this is all data now - open and scraped
-//                    o = postProcessStaticData(o);
-            	}
                 database.loadData(o, Exhibit.Persistence.getBaseURL(url));
             }
         } catch (e) {
@@ -264,62 +172,6 @@ function loadScrapedData(link, database, cont) {
     Exhibit.UI.showBusyIndicator();
     SimileAjax.XmlHttp.get(url, fError, fDone);
 };
-
-/*
-// processes open and scraped data
-function postProcessStaticData(o) {
-	if ("items" in o) {
-        var items = o.items;
-        for (var j = 0; j < items.length; j++) {
-            var item = items[j];
-			if ('prereqs' in item) {
-				if (item.prereqs == "") {
-					item.prereqs = "--";
-				}
-				while (item.prereqs.search(/GIR:/) >= 0) {
-					gir = item.prereqs.match(/GIR:.{4}/);
-					item.prereqs = item.prereqs.replace(/GIR:.{4}/, girData[gir].join(" or "));
-				}
-				while (item.prereqs.search(/[\]\[]/) >= 0 ) {
-					item.prereqs = item.prereqs.replace(/[\]\[]/, "");
-				}
-				var matches = item.prereqs.match(/([^\s\/]+\.[\d]+\w?)/g);
-				if (matches != null) {
-					var s = item.prereqs;
-					var output = "";
-					var from = 0;
-					for (var m = 0; m < matches.length; m++) {
-						var match = matches[m];
-						var i = s.indexOf(match, from);
-						var replace = 
-							"<a href=\"javascript:{}\" onclick=\"showPrereq(this, '" +
-								match.replace(/J/, "")+"');\">" + match + "</a>";
-						
-						output += s.substring(from, i) + replace;
-						from = i + match.length;
-					}
-					item.prereqs = output + s.substring(from);
-				}
-			}
-			if ('timeAndPlace' in item) {
-				if (typeof item.timeAndPlace != "string") {
-					item.timeAndPlace = item.timeAndPlace.join(", ");
-				} 
-				if (item.timeAndPlace.search(/ARRANGED/) >= 0 || item.timeAndPlace.search(/null/) >= 0) {
-					item.timeAndPlace = 'To be arranged';
-				}
-			}
-			if ('units' in item) {
-				if (item.units == '0-0-0' || item.units == 'unknown') {
-					item.units = 'Arranged';
-					item['total-units'] = 'Arranged';
-				}
-			}
-		}
-	}
-	return o;
-}
-*/
 
 function showPrereq(elmt, itemID) {
     Exhibit.UI.showItemInPopup(itemID, elmt, exhibit.getUIContext());
@@ -363,29 +215,6 @@ function showSchedulePreview() {
     document.getElementById("schedule-preview-pane").style.visibility = "visible";
     
     scroll(0, 0);
-}
-
-function makeFacet(div) {
-    div.className = "";
-    
-    var facet = Exhibit.UI.createFacet(facetData[div.id], div, window.exhibit.getUIContext());    
-    window.exhibit.setComponent(div.id, facet);
-    
-    div.firstChild.onclick = function() { unmakeFacet(div); }
-    div.onclick = null;
-};
-
-function unmakeFacet(div) {
-    var facet = window.exhibit.getComponent(div.id);
-    if (facet.hasRestrictions() && !window.confirm("You have something selected in this facet. OK to clear your selection?")) {
-        return;
-    }
-    
-    window.exhibit.disposeComponent(div.id);
-    
-    div.innerHTML = facetData[div.id].facetLabel;
-    div.className = "collapsed-facet";
-    div.onclick = function() { makeFacet(div); };
 }
 
 

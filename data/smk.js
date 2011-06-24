@@ -43,7 +43,7 @@
 	    "id":		    "S7",
 	    "label":		    "2nd session",
 	    "session-of":	    "2",
-	    "timeAndPlace":	    "WF16-20 German International School",
+	    "timeAndPlace":	    "WF16-20 Sunnyvale Park",
 	},
 {   type :                  "Activity",
 	    id:			    "3",

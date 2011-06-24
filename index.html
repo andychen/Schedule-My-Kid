@@ -2,13 +2,12 @@
 <html>
     <head>
         <title>Schedule My Kid (alpha)</title>
-		<script src="http://needle.csail.mit.edu/pickzibit/src/webapp/api/exhibit-api.js?autoCreate=false&log=false" type="text/javascript"></script>
+        <script src="scripts/exhibit/exhibit-api.js?autoCreate=false&log=false" type="text/javascript"></script>
         <script>
             window.jQuery = SimileAjax.jQuery;
             window.$ = SimileAjax.jQuery;
         </script>
-        <script src="http://static.simile.mit.edu/timegrid/api-1.0-alpha2/timegrid-api.js?autoCreate=false" type="text/javascript"></script>
-
+	<script src="scripts/timegrid/timegrid-api.js?autoCreate=false" type="text/javascript"></script>
         <script src="scripts/config.js" type="text/javascript"></script>
         <script src="scripts/browse.js" type="text/javascript"></script>
         <script src="scripts/mini-timegrid.js" type="text/javascript"></script>
@@ -108,14 +107,14 @@
                 style="height:350px"></div>
             <div id="total-units"></div>
             <div ex:role="viewPanel">
-                <div ex:role="lens" ex:itemTypes="Activity" 
+                <div ex:role="lens" ex:itemTypes="Session" 
                     class="preview-class-lens" ex:background-style-content=".color" style="display: none;">
                     <button ex:sectionID-content="value" onclick="onUnpick(this);" class="remove-preview">X</button>
-                    <span ex:content=".label"></span>
+		    <span ex:content=".session-of.label"></span> - <span ex:content=".label"></span>
                 </div>
 
                 <div ex:role="view"
-                    ex:orders=".class.label"
+                    ex:orders=".session-of.label, .session-of"
                     ex:showHeader="false"
                     ex:showAll="false"
                     ex:grouped="false"
