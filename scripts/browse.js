@@ -251,7 +251,6 @@ function onUnpick(button) {
 };
 
 function doPick(sectionID) {
-    console.log("doPick: "+sectionID);
     window.database.addStatement(sectionID, "picked", "true");
     window.database.addStatement(sectionID, "color", getNewColor());
     window.database.removeStatement(sectionID, "temppick", "true");
@@ -261,7 +260,6 @@ function doPick(sectionID) {
     showHidePickDiv(sectionID, true);
 }
 function doUnpick(sectionID) {
-    console.log("doUnpick: "+sectionID);
     var color = window.database.getObject(sectionID, "color");
     releaseColor(color);
     

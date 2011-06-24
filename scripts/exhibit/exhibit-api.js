@@ -34,7 +34,7 @@
         window.Exhibit = {
             version:    "2.2.0",
             loaded:     false,
-            params:     { bundle: !useLocalResources, authenticated: !noAuthentication, autoCreate: true, safe: false },
+            params:     { bundle: !useLocalResources, authenticated: !noAuthentication, autoCreate: false, safe: false },
             namespace:  "http://simile.mit.edu/2006/11/exhibit#",
             importers:  {},
             locales:    [ "en" ]
