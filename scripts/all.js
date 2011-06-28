@@ -12453,4 +12453,5 @@ if(!("l10n" in Exhibit.ViewUtilities)){Exhibit.ViewUtilities.l10n={};
 }Exhibit.ViewUtilities.l10n.unplottableMessageFormatter=function(B,A,C){var D=A.length;
 return String.substitute("<a class='exhibit-action exhibit-views-unplottableCount' href='javascript:void' id='unplottableCountLink'>%0</a> out of <class class='exhibit-views-totalCount'>%1</span> cannot be plotted.",[D==1?(D+" result"):(D+" results"),B]);
 };
+/** TimegridAPI -- where it would go? **/
 

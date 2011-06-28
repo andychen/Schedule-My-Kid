@@ -18,33 +18,7 @@ console.log("== timegrid-api.js ==");
         };
     
         var javascriptFiles = [
-            "timegrid.js",
-        
-            "util/util.js",
-            "util/debug.js",
-            "util/date.js",
-            "util/excanvas.pack.js",
-            "util/jquery.dimensions.js", 
-            "util/jquery.simile.js", 
-            "util/jquery.corner.js",
-            "util/jquery.prettybox.js",
-            "util/dstructs/dstructs.js",
             
-            "controls.js",
-            "listeners.js",
-            "grid.js",
-            "themes.js",
-            "labellers.js",
-            
-            "sources/default.js",
-            "sources/recurring.js",
-            
-            "layouts/layout.js",
-            "layouts/nmonth.js",
-            "layouts/nday.js",
-            "layouts/weekly.js",
-            "layouts/monthly.js",
-            "layouts/property.js"
         ];
         
         var locales = [  ];

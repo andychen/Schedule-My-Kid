@@ -2,7 +2,7 @@
  *  Default Event Source
  *****************************************************************************/
 
-console.log("== default.js ==");
+
 Timegrid.DefaultEventSource = function(eventIndex) {
     Timegrid.DefaultEventSource.superclass.call(this);
     this._events = (eventIndex instanceof Object) ? eventIndex : new SimileAjax.EventIndex();
