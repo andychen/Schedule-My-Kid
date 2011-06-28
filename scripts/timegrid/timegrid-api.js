@@ -50,17 +50,6 @@ console.log("== timegrid-api.js ==");
          */
             SimileAjax.includeJavascriptFiles(document, Timegrid.urlPrefix + "scripts/", javascriptFiles);
         
-        /*
-         *  Localization
-         */
-        var localeFiles = [];
-        for (var i = 0; i < locales.length; i++) {
-            localeFiles.push(locales[i] + "/locale.js");
-        };
-        SimileAjax.includeJavascriptFiles(document, Timegrid.urlPrefix + "locales/", localeFiles);
-        if (Timegrid.params.autoCreate) { 
-            SimileAjax.includeJavascriptFile(document, Timegrid.urlPrefix + "scripts/create.js");
-        }
         Timegrid.loaded = true;
     };
     

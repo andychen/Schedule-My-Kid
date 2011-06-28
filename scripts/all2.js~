@@ -2981,21 +2981,6 @@ Timegrid.Layout.prototype.getXLabels = Timegrid.abstract("getXLabels");
  * @return {Array} an array of strings to use as row labels
  */
 Timegrid.Layout.prototype.getYLabels = Timegrid.abstract("getYLabels");
-/******************************************************************************
- * MonthLayout
- * @fileoverview
- *   This is where the monthly layout is defined.  The layout is designed to 
- *   resemble the equivalent Google Calendar view.
- * @author masont
- *****************************************************************************/
-
-Timegrid.MonthLayout = function(eventSource, params) {
-    params.n = 1;
-    params.title = params.title || Timegrid.MonthLayout.l10n.makeTitle();
-    Timegrid.MonthLayout.superclass.call(this, eventSource, params);
-};
-Timegrid.LayoutFactory.registerLayout("month", Timegrid.MonthLayout);
-$.inherit(Timegrid.MonthLayout, Timegrid.NMonthLayout);
 /**
  * NMonthLayout
  * @fileoverview
@@ -3255,13 +3240,29 @@ Timegrid.NMonthLayout.getEndpoints = function(evt) {
                event: evt } ];
 };
 /******************************************************************************
+ * MonthLayout
+ * @fileoverview
+ *   This is where the monthly layout is defined.  The layout is designed to 
+ *   resemble the equivalent Google Calendar view.
+ * @author masont
+ *****************************************************************************/
+
+Timegrid.MonthLayout = function(eventSource, params) {
+    params.n = 1;
+    params.title = params.title || Timegrid.MonthLayout.l10n.makeTitle();
+    Timegrid.MonthLayout.superclass.call(this, eventSource, params);
+};
+Timegrid.LayoutFactory.registerLayout("month", Timegrid.MonthLayout);
+$.inherit(Timegrid.MonthLayout, Timegrid.NMonthLayout);
+
+/******************************************************************************
  * NDayLayout
  * @fileoverview
  *   This is where the n-day layout is defined.  The layout is designed to 
  *   resemble the equivalent Google Calendar view.
  * @author masont
  *****************************************************************************/
- 
+console.log("== NDayLayout.js =="); 
  /**
   * Constructs an NDayLayout object.
   * @class NDayLayout is a subclass of Layout that implements an n-day event
@@ -3686,35 +3687,141 @@ Timegrid.PropertyLayout.getEndpoints = function(evt) {
                event: evt } ];
 };
 console.log("== locale.js ==");
-/*==================================================
- *  English localization 
- *  (also base and default localization)
- *==================================================
- */
-(function() {
-    var javascriptFiles = [
-        "timegrid-l10n.js",
-        
-        "util/date-l10n.js",
-        
-        "layouts/nday-l10n.js",
-        "layouts/nmonth-l10n.js",
-        "layouts/monthly-l10n.js",
-        "layouts/weekly-l10n.js",
-        "layouts/property-l10n.js"
-    ];
-    var cssFiles = [
-    ];
+/******************************************************************************
+ *  Timegrid English localization
+ *****************************************************************************/
+ 
+if (!("l10n" in Timegrid)) {
+    Timegrid.l10n = {};
+}
 
-    var urlPrefix = Timegrid.urlPrefix + "locales/en/";
-    if (Timegrid.params.bundle) {
-        SimileAjax.includeJavascriptFiles(document, urlPrefix, [ "timegrid-en-bundle.js" ]);
-        if (cssFiles.length > 0) {
-            SimileAjax.includeCssFiles(document, urlPrefix, [ "timegrid-en-bundle.css" ]);
-        }
-    } else {
-        SimileAjax.includeJavascriptFiles(document, urlPrefix + "scripts/", javascriptFiles);
-        SimileAjax.includeCssFiles(document, urlPrefix + "styles/", cssFiles);
+Timegrid.l10n.loadingMessage = "Loading...";
+
+Timegrid.l10n.jsonErrorMessage = "Failed to load JSON data from";
+
+Timegrid.l10n.xmlErrorMessage = "Failed to load XML data from";
+/******************************************************************************
+ *  Timegrid Date English localization
+ *****************************************************************************/
+
+if (!("l10n" in Date)) {
+    Date.l10n = {};
+}
+ 
+/** Full month names. Change this for local month names */
+Date.l10n.monthNames =[ 'January','February','March','April','May','June','July','August','September','October','November','December'];
+
+/** Month abbreviations. Change this for local month names */
+Date.l10n.monthAbbreviations = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+/** Full day names. Change this for local month names */
+Date.l10n.dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+/** Day abbreviations. Change this for local month names */
+Date.l10n.dayAbbreviations = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+/**
+ * Used for parsing ambiguous dates like 1/2/2000 - default to preferring
+ * 'American' format meaning Jan 2. Set to false to prefer 'European' format 
+ * meaning Feb 1.
+ */
+Date.l10n.preferAmericanFormat = true;
+
+/** Used to specify which day the week starts on, 0 meaning Sunday, etc. */
+Date.l10n.firstDayOfWeek = 0;
+/******************************************************************************
+ *  Timegrid NMonthLayout English localization
+ *****************************************************************************/
+ 
+if (!("l10n" in Timegrid.NMonthLayout)) {
+    Timegrid.NMonthLayout.l10n = {};
+}
+
+/** Function to create a title string from an n-value */
+Timegrid.NMonthLayout.l10n.makeTitle = function(n) { return n + "-Month"; }
+
+/** Function to combine two dates into a string describing the grid's range */
+Timegrid.NMonthLayout.l10n.makeRange = function(d1, d2) {
+    var string = d1.format(Timegrid.NMonthLayout.l10n.startFormat);
+    if (d2) {
+        string +=  " - " + d2.format(Timegrid.NMonthLayout.l10n.endFormat);
     }
-})();
+    return string;
+};
+
+/** Format not needed, localized day names are in Timegrid.l10n.dayNames */
+Timegrid.NMonthLayout.l10n.xLabelFormat = "";
+
+/** Format for vertical "W23" style labels */
+Timegrid.NMonthLayout.l10n.yLabelFormat = "Ww";
+
+/** Format for displaying the grid's starting date, e.g. "6/12/2007" */
+Timegrid.NMonthLayout.l10n.startFormat = "MMM yyyy";
+
+/** Format for displaying the grid's ending date, e.g. "6/15/2007" */
+Timegrid.NMonthLayout.l10n.endFormat = "MMM yyyy";
+/******************************************************************************
+ *  Timegrid MonthLayout English localization
+ *****************************************************************************/
+ 
+if (!("l10n" in Timegrid.MonthLayout)) {
+    Timegrid.MonthLayout.l10n = {};
+}
+
+/** Function to create a title string */
+Timegrid.MonthLayout.l10n.makeTitle = function(n) { return "Month"; }
+/******************************************************************************
+ *  Timegrid NDayLayout English localization
+ *****************************************************************************/
+
+if (!("l10n" in Timegrid.NDayLayout)) {
+    Timegrid.NDayLayout.l10n = { mini: {} };
+}
+ 
+/** Function to create a title string from an n-value */
+Timegrid.NDayLayout.l10n.makeTitle = function(n) { return n + "-Day"; }
+
+/** Function to combine two dates into a string describing the grid's range */
+Timegrid.NDayLayout.l10n.makeRange = function(d1, d2) {
+    return d1.format(Timegrid.NDayLayout.l10n.startFormat) + " - " +
+           d2.format(Timegrid.NDayLayout.l10n.endFormat);
+};
+
+/** Format for horizontal "Mon 5/24" style labels */
+Timegrid.NDayLayout.l10n.xLabelFormat = "E M/d";
+Timegrid.NDayLayout.l10n.mini.xLabelFormat = "e";
+
+/** Format for vertical "12am" style labels */
+Timegrid.NDayLayout.l10n.yLabelFormat = "ha";
+Timegrid.NDayLayout.l10n.mini.yLabelFormat = "h";
+
+/** Format for displaying the grid's starting date, e.g. "6/12/2007" */
+Timegrid.NDayLayout.l10n.startFormat = "M/d/yyyy";
+
+/** Format for displaying the grid's ending date, e.g. "6/15/2007" */
+Timegrid.NDayLayout.l10n.endFormat = "M/d/yyyy";
+/******************************************************************************
+ *  Timegrid WeekLayout English localization
+ *****************************************************************************/
+ 
+if (!("l10n" in Timegrid.WeekLayout)) {
+    Timegrid.WeekLayout.l10n = {};
+}
+
+/** Function to create a title string */
+Timegrid.WeekLayout.l10n.makeTitle = function(n) { return "Week"; }
+/******************************************************************************
+ *  Timegrid PropertyLayout English localization
+ *****************************************************************************/
+
+if (!("l10n" in Timegrid.PropertyLayout)) {
+    Timegrid.PropertyLayout.l10n = {};
+}
+
+/** Function to create a title string */
+Timegrid.PropertyLayout.l10n.makeTitle = function() { return "Property"; }
+
+/** Format for vertical "12am" style labels */
+Timegrid.PropertyLayout.l10n.yLabelFormat = "ha";
+
 
