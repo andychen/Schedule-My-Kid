@@ -2,6 +2,7 @@
  * Exhibit extensions
  *==================================================
  */
+console.log("== browse.js == ");
 var debug = false;
 
 Exhibit.Functions["building"] = {

@@ -2,6 +2,7 @@
  * Timegrid
  *****************************************************************************/
 
+console.log("== timegrid.js == ");
 Timegrid.create = function(node, eventSource, layoutName, layoutParams) {
     return new Timegrid._Impl(node, eventSource, layoutName, layoutParams);
 };

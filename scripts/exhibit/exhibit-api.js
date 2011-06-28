@@ -7,6 +7,7 @@
  *==================================================
  */
 
+console.log("== exhibit-api.js ==");
 (function() {
     var isCompiled = ("Exhibit_isCompiled" in window) && window.Exhibit_isCompiled;
     
@@ -147,13 +148,6 @@
         /*
          *  Extensions (for backward compatibility)
          */
-        if (includeTimeline) {
-            scriptURLs.push(Exhibit.urlPrefix + "extensions/time/time-extension.js");
-        }
-        if (includeMap) {
-            scriptURLs.push(Exhibit.urlPrefix + "extensions/map/map-extension.js");
-        }
-        
         if (!isCompiled) {
             SimileAjax.includeJavascriptFiles(document, "", scriptURLs);
         }
@@ -164,29 +158,6 @@
     /*
      *  Load SimileAjax if it's not already loaded
      */
-    if (typeof SimileAjax == "undefined" && !isCompiled) {
-        window.SimileAjax_onLoad = loadMe;
-        
-	var url = "scripts/simile-ajax/simile-ajax-api.js";
-            
-        var createScriptElement = function() {
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.language = "JavaScript";
-            script.src = url;
-            document.getElementsByTagName("head")[0].appendChild(script);
-        }
-        if (document.body == null) {
-            try {
-                document.write("<script src='" + url + "' type='text/javascript'></script>");
-            } catch (e) {
-                createScriptElement();
-            }
-        } else {
-            createScriptElement();
-        }
-    } else {
         loadMe();
-    }
 })();
 

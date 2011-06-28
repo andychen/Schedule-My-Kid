@@ -4,6 +4,7 @@
  *   Timegrid operate.
  *****************************************************************************/
 
+console.log("== timegrid-api.js ==");
 (function() {
     var loadMe = function() {
         if (typeof window.Timegrid != "undefined") {

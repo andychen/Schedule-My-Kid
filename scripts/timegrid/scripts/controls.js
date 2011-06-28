@@ -1,3 +1,4 @@
+console.log("== controls.js ==");
 /**
  * Controls
  */

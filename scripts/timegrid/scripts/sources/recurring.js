@@ -1,3 +1,4 @@
+console.log("== recurring.js ==");
 /**
  * @name Timegrid.RecurringEventSource
  * @author masont

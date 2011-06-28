@@ -1,6 +1,4 @@
-﻿
-
-/* jquery-1.4.2.min.js */
+﻿/* jquery-1.4.2.min.js */
 (function(An,v){function Az(){if(!AF.isReady){try{x.documentElement.doScroll("left");
 }catch(A){setTimeout(Az,1);
 return ;

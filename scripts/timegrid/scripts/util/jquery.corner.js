@@ -1,3 +1,4 @@
+console.log("== jquery.corner.js ==");
 	// jquery-roundcorners-canvas
 	// www.meerbox.nl
 	

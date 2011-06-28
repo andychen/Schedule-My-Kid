@@ -1,3 +1,4 @@
+console.log("== jquery.simile.js ==");
 /**
  * This code implements the Simile jQuery plugin, which in turns simply
  * provides several convenient and useful functions for manipulating the

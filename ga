@@ -1,1 +1,1 @@
-git add index.html scripts/* styles/* data/* ga
+git add -f index.html scripts/* styles/* data/* ga

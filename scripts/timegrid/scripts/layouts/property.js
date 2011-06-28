@@ -1,3 +1,4 @@
+console.log("== property.js ==");
 /**
  * @name Timegrid.PropertyLayout
  * @author masont

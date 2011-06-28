@@ -1,3 +1,4 @@
+console.log("== mini-timegrid.js ==");
 /**
  * @description Javascript code for loading the mini Timegrid displaying
  *   picked schedules 

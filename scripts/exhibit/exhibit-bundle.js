@@ -1492,6 +1492,7 @@ Exhibit.Expression._ControlCall.prototype.evaluate=function(A,B,D,C){return Exhi
 
 
 /* functions.js */
+console.log("FUNCTIONS.JS RUN");
 Exhibit.Functions={};
 Exhibit.FunctionUtilities={};
 Exhibit.FunctionUtilities.registerSimpleMappingFunction=function(A,B,C){Exhibit.Functions[A]={f:function(D){var F=new Exhibit.Set();

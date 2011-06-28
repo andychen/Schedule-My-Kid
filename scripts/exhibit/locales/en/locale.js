@@ -3,6 +3,7 @@
  *  (also base and default localization)
  *==================================================
  */
+console.log("== exhibit locale.js ==");
 (function() {
     var isCompiled = ("Exhibit_isCompiled" in window) && window.Exhibit_isCompiled;
     if (!isCompiled) {

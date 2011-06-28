@@ -1,3 +1,4 @@
+console.log("== date.js ==");
 /**
  * Copyright (c)2005-2007 Matt Kruse (javascripttoolbox.com)
  * 

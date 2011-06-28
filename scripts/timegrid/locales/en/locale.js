@@ -1,3 +1,4 @@
+console.log("== locale.js ==");
 /*==================================================
  *  English localization 
  *  (also base and default localization)

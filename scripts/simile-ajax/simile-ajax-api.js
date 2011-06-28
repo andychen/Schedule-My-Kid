@@ -2,7 +2,7 @@
  *  Simile Ajax API
  *==================================================
  */
-
+console.log("== simile-ajax-api.js ==");
 if (typeof SimileAjax == "undefined") {
     var isCompiled = ("SimileAjax_isCompiled" in window) && window.SimileAjax_isCompiled;
 
@@ -43,6 +43,7 @@ if (typeof SimileAjax == "undefined") {
         return null;
     };
     SimileAjax.includeJavascriptFile = function(doc, url, onerror, charset) {
+	console.log("included: "+url);
         onerror = onerror || "";
         if (doc.body == null) {
             try {

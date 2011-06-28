@@ -1,3 +1,4 @@
+console.log("== dstructs.js ==");
 /*
  * Copyright (c) 2007 Mason Tang 
  *

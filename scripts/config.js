@@ -1,3 +1,4 @@
+console.log("== config.js == ");
 var debug = (document.location.search == "?debug");
 
 var colorTable = [

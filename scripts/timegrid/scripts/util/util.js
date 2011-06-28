@@ -2,6 +2,7 @@
  * Utility Functions
  *****************************************************************************/
 
+console.log("== util.js ==");
 Timegrid.abstract = function(name) {
     return function() { 
         throw "A " + name + " method has not been implemented!"; 
